@@ -1,20 +1,81 @@
 import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:boilerplate/constants/assets.dart';
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/utils/routes/routes.dart';
-import 'package:boilerplate/stores/form/form_store.dart';
-import 'package:boilerplate/stores/theme/theme_store.dart';
-import 'package:boilerplate/utils/device/device_utils.dart';
-import 'package:boilerplate/utils/locale/app_localization.dart';
-import 'package:boilerplate/widgets/app_icon_widget.dart';
-import 'package:boilerplate/widgets/empty_app_bar_widget.dart';
-import 'package:boilerplate/widgets/progress_indicator_widget.dart';
-import 'package:boilerplate/widgets/rounded_button_widget.dart';
-import 'package:boilerplate/widgets/textfield_widget.dart';
+import 'package:flutter_boilerplate_project/constants/assets.dart';
+import 'package:flutter_boilerplate_project/data/sharedpref/constants/preferences.dart';
+import 'package:flutter_boilerplate_project/utils/routes/routes.dart';
+import 'package:flutter_boilerplate_project/stores/form/form_store.dart';
+import 'package:flutter_boilerplate_project/stores/theme/theme_store.dart';
+import 'package:flutter_boilerplate_project/utils/device/device_utils.dart';
+import 'package:flutter_boilerplate_project/utils/locale/app_localization.dart';
+import 'package:flutter_boilerplate_project/widgets/app_icon_widget.dart';
+import 'package:flutter_boilerplate_project/widgets/empty_app_bar_widget.dart';
+import 'package:flutter_boilerplate_project/widgets/progress_indicator_widget.dart';
+import 'package:flutter_boilerplate_project/widgets/rounded_button_widget.dart';
+import 'package:flutter_boilerplate_project/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+class CheckState extends StatefulWidget {
+  CheckState(this.count);
+  final int count;
+
+  @override
+  State<CheckState> createState() => _CheckStateState();
+}
+
+class _CheckStateState extends State<CheckState> {
+
+  int countOfWidget = 1000;
+  
+  @override
+  void initState() {
+    print('init state');
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      print('did mount');
+    });
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    print('didChangeDependencies');
+    print(MediaQuery.of(context).size.width);
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant CheckState oldWidget) {
+    print('didUpdate widge');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    print('dispose');
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('rebuild');
+    print('count off widget parent change ${widget.count}');
+    print('count off widget ${countOfWidget}');
+    return Column(
+      children: [
+        Text(widget.count.toString()), 
+        Text(countOfWidget.toString()), 
+        TextButton(
+              onPressed: () {
+                setState(() {
+                  countOfWidget += 10;
+                });
+              },
+        child: Text('set state!')),
+      ],
+    );
+  }
+}
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -34,6 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   //stores:---------------------------------------------------------------------
   final _store = FormStore();
+
+  int count = 1;
+  bool isShow = false;
 
   @override
   void initState() {
@@ -59,29 +123,45 @@ class _LoginScreenState extends State<LoginScreen> {
   // body methods:--------------------------------------------------------------
   Widget _buildBody() {
     return Material(
-      child: Stack(
+      child: Column(
         children: <Widget>[
-          MediaQuery.of(context).orientation == Orientation.landscape
-              ? Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: _buildLeftSide(),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: _buildRightSide(),
-                    ),
-                  ],
-                )
-              : Center(child: _buildRightSide()),
-          Observer(
-            builder: (context) {
-              return _store.success
-                  ? navigate(context)
-                  : _showErrorMessage(_store.errorStore.errorMessage);
-            },
-          ),
+          if(isShow == true)
+          CheckState(count),
+          TextButton(
+              onPressed: () {
+                setState(() {
+                  isShow = !isShow;
+                });
+              },
+              child: Text('Do some thing!')),
+          TextButton(
+              onPressed: () {
+                setState(() {
+                  count += 1;
+                });
+              },
+              child: Text('+ number')),
+          // MediaQuery.of(context).orientation == Orientation.landscape
+          //     ? Row(
+          //         children: <Widget>[
+          //           Expanded(
+          //             flex: 1,
+          //             child: _buildLeftSide(),
+          //           ),
+          //           Expanded(
+          //             flex: 1,
+          //             child: _buildRightSide(),
+          //           ),
+          //         ],
+          //       )
+          //     : Center(child: _buildRightSide()),
+          // Observer(
+          //   builder: (context) {
+          //     return _store.success
+          //         ? navigate(context)
+          //         : _showErrorMessage(_store.errorStore.errorMessage);
+          //   },
+          // ),
           Observer(
             builder: (context) {
               return Visibility(

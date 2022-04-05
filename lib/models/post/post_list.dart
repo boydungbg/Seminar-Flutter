@@ -1,4 +1,4 @@
-import 'package:boilerplate/models/post/post.dart';
+import 'package:flutter_boilerplate_project/models/post/post.dart';
 
 class PostList {
   final List<Post>? posts;

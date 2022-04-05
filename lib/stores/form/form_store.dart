@@ -1,4 +1,4 @@
-import 'package:boilerplate/stores/error/error_store.dart';
+import 'package:flutter_boilerplate_project/stores/error/error_store.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 

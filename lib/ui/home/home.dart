@@ -1,11 +1,11 @@
 import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/utils/routes/routes.dart';
-import 'package:boilerplate/stores/language/language_store.dart';
-import 'package:boilerplate/stores/post/post_store.dart';
-import 'package:boilerplate/stores/theme/theme_store.dart';
-import 'package:boilerplate/utils/locale/app_localization.dart';
-import 'package:boilerplate/widgets/progress_indicator_widget.dart';
+import 'package:flutter_boilerplate_project/data/sharedpref/constants/preferences.dart';
+import 'package:flutter_boilerplate_project/utils/routes/routes.dart';
+import 'package:flutter_boilerplate_project/stores/language/language_store.dart';
+import 'package:flutter_boilerplate_project/stores/post/post_store.dart';
+import 'package:flutter_boilerplate_project/stores/theme/theme_store.dart';
+import 'package:flutter_boilerplate_project/utils/locale/app_localization.dart';
+import 'package:flutter_boilerplate_project/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:material_dialog/material_dialog.dart';
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         softWrap: false,
-        style: Theme.of(context).textTheme.title,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       subtitle: Text(
         '${_postStore.postList?.posts?[position].body}',
