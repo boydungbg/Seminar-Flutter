@@ -61,11 +61,65 @@ mixin _$PostStore on _PostStore, Store {
     });
   }
 
+  final _$countAtom = Atom(name: '_PostStore.count');
+
+  @override
+  int get count {
+    _$countAtom.reportRead();
+    return super.count;
+  }
+
+  @override
+  set count(int value) {
+    _$countAtom.reportWrite(value, super.count, () {
+      super.count = value;
+    });
+  }
+
+  final _$nameAtom = Atom(name: '_PostStore.name');
+
+  @override
+  String get name {
+    _$nameAtom.reportRead();
+    return super.name;
+  }
+
+  @override
+  set name(String value) {
+    _$nameAtom.reportWrite(value, super.name, () {
+      super.name = value;
+    });
+  }
+
   final _$getPostsAsyncAction = AsyncAction('_PostStore.getPosts');
 
   @override
   Future<dynamic> getPosts() {
     return _$getPostsAsyncAction.run(() => super.getPosts());
+  }
+
+  final _$_PostStoreActionController = ActionController(name: '_PostStore');
+
+  @override
+  dynamic updateCount() {
+    final _$actionInfo = _$_PostStoreActionController.startAction(
+        name: '_PostStore.updateCount');
+    try {
+      return super.updateCount();
+    } finally {
+      _$_PostStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic updateName() {
+    final _$actionInfo =
+        _$_PostStoreActionController.startAction(name: '_PostStore.updateName');
+    try {
+      return super.updateName();
+    } finally {
+      _$_PostStoreActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
@@ -74,6 +128,8 @@ mixin _$PostStore on _PostStore, Store {
 fetchPostsFuture: ${fetchPostsFuture},
 postList: ${postList},
 success: ${success},
+count: ${count},
+name: ${name},
 loading: ${loading}
     ''';
   }

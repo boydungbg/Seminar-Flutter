@@ -2,6 +2,8 @@ import 'package:flutter_boilerplate_project/constants/app_theme.dart';
 import 'package:flutter_boilerplate_project/constants/strings.dart';
 import 'package:flutter_boilerplate_project/data/repository.dart';
 import 'package:flutter_boilerplate_project/di/components/service_locator.dart';
+import 'package:flutter_boilerplate_project/ui/demo/demo_provider.dart';
+import 'package:flutter_boilerplate_project/ui/demo/life_widget.dart';
 import 'package:flutter_boilerplate_project/utils/routes/routes.dart';
 import 'package:flutter_boilerplate_project/stores/language/language_store.dart';
 import 'package:flutter_boilerplate_project/stores/post/post_store.dart';
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: Strings.appName,
-            theme: _themeStore.darkMode ? themeDataDark : themeData,
+            // theme: _themeStore.darkMode ? themeDataDark : themeData,
             routes: Routes.routes,
             // initialRoute: Routes.splash,
             locale: Locale(_languageStore.locale),
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
               // Built-in localization of basic text for Cupertino widgets
               GlobalCupertinoLocalizations.delegate,
             ],
-            home: _userStore.isLoggedIn ? HomeScreen() : LoginScreen(),
+            home: DemoLifeWidget(),
           );
         },
       ),

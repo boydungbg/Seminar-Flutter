@@ -1,3 +1,4 @@
+import 'package:faker/faker.dart';
 import 'package:flutter_boilerplate_project/data/repository.dart';
 import 'package:flutter_boilerplate_project/models/post/post_list.dart';
 import 'package:flutter_boilerplate_project/stores/error/error_store.dart';
@@ -32,10 +33,31 @@ abstract class _PostStore with Store {
   @observable
   bool success = false;
 
+  @observable
+  int count = 1;
+
+  @observable
+  String name = '';
+
+
   @computed
   bool get loading => fetchPostsFuture.status == FutureStatus.pending;
 
   // actions:-------------------------------------------------------------------
+
+  @action
+  updateCount() {
+    count+=1;
+  }
+
+  @action
+  updateName() {
+    var faker = new Faker();
+    name = faker.person.name();
+  }
+
+
+
   @action
   Future getPosts() async {
     final future = _repository.getPosts();

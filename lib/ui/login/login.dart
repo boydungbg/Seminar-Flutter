@@ -16,67 +16,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CheckState extends StatefulWidget {
-  CheckState(this.count);
-  final int count;
-
-  @override
-  State<CheckState> createState() => _CheckStateState();
-}
-
-class _CheckStateState extends State<CheckState> {
-
-  int countOfWidget = 1000;
-  
-  @override
-  void initState() {
-    print('init state');
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      print('did mount');
-    });
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    print('didChangeDependencies');
-    print(MediaQuery.of(context).size.width);
-    super.didChangeDependencies();
-  }
-
-  @override
-  void didUpdateWidget(covariant CheckState oldWidget) {
-    print('didUpdate widge');
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void dispose() {
-    print('dispose');
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print('rebuild');
-    print('count off widget parent change ${widget.count}');
-    print('count off widget ${countOfWidget}');
-    return Column(
-      children: [
-        Text(widget.count.toString()), 
-        Text(countOfWidget.toString()), 
-        TextButton(
-              onPressed: () {
-                setState(() {
-                  countOfWidget += 10;
-                });
-              },
-        child: Text('set state!')),
-      ],
-    );
-  }
-}
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -123,45 +62,29 @@ class _LoginScreenState extends State<LoginScreen> {
   // body methods:--------------------------------------------------------------
   Widget _buildBody() {
     return Material(
-      child: Column(
+      child: Stack(
         children: <Widget>[
-          if(isShow == true)
-          CheckState(count),
-          TextButton(
-              onPressed: () {
-                setState(() {
-                  isShow = !isShow;
-                });
-              },
-              child: Text('Do some thing!')),
-          TextButton(
-              onPressed: () {
-                setState(() {
-                  count += 1;
-                });
-              },
-              child: Text('+ number')),
-          // MediaQuery.of(context).orientation == Orientation.landscape
-          //     ? Row(
-          //         children: <Widget>[
-          //           Expanded(
-          //             flex: 1,
-          //             child: _buildLeftSide(),
-          //           ),
-          //           Expanded(
-          //             flex: 1,
-          //             child: _buildRightSide(),
-          //           ),
-          //         ],
-          //       )
-          //     : Center(child: _buildRightSide()),
-          // Observer(
-          //   builder: (context) {
-          //     return _store.success
-          //         ? navigate(context)
-          //         : _showErrorMessage(_store.errorStore.errorMessage);
-          //   },
-          // ),
+          MediaQuery.of(context).orientation == Orientation.landscape
+              ? Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: _buildLeftSide(),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: _buildRightSide(),
+                    ),
+                  ],
+                )
+              : Center(child: _buildRightSide()),
+          Observer(
+            builder: (context) {
+              return _store.success
+                  ? navigate(context)
+                  : _showErrorMessage(_store.errorStore.errorMessage);
+            },
+          ),
           Observer(
             builder: (context) {
               return Visibility(
