@@ -13,11 +13,12 @@ class _DemoContextState extends State<DemoContext> {
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Demo context'),
-          actions:[IconButton(onPressed: () {
-          Navigator.pushNamed(context, Routes.demoNavigator);
-        }, icon: Icon(Icons.arrow_right_rounded)),
+        appBar: AppBar(title: Text('Demo context'), actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.demoNavigator);
+              },
+              icon: Icon(Icons.arrow_right_rounded)),
         ]),
         body: Container(
           width: double.infinity,
@@ -26,25 +27,23 @@ class _DemoContextState extends State<DemoContext> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Stateless rebuild when parent rebuild
-                 Builder(
-                   builder: (_) {
-                     return TextButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(Colors.red),
-                            ),
-                            onPressed: () {
-                              Scaffold.of(_).showSnackBar(SnackBar(content: Text('Sao khong loi!')));
-                            },
-                            child: const Text(
-                              'Show snackber',
-                              style: TextStyle(color: Colors.white),
-                            ));
-                   }
-                 )
+                Builder(builder: (_) {
+                  return TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                      ),
+                      onPressed: () {
+                        ScaffoldMessenger.of(_).showSnackBar(
+                            SnackBar(content: Text('Sao khong loi!')));
+                      },
+                      child: const Text(
+                        'Show snackber',
+                        style: TextStyle(color: Colors.white),
+                      ));
+                })
               ]),
         ),
       ),
     );
   }
 }
-
