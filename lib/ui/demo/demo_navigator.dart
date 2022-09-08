@@ -16,7 +16,7 @@ class _DemoNavigatorState extends State<DemoNavigator> {
         appBar: AppBar(title: Text('Demo navigation'), actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, Routes.demoProvider);
+                Navigator.pushNamed(context, Routes.demoInherited);
               },
               icon: Icon(Icons.arrow_right_rounded)),
         ]),

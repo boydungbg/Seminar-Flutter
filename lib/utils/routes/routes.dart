@@ -1,3 +1,4 @@
+import 'package:flutter_boilerplate_project/ui/demo/demo_inherited.dart';
 import 'package:flutter_boilerplate_project/ui/demo/demo_navigator.dart';
 import 'package:flutter_boilerplate_project/ui/demo/demo_provider.dart';
 import 'package:flutter_boilerplate_project/ui/demo/life_widget.dart';
@@ -18,6 +19,7 @@ class Routes {
   static const String demoContext = '/demoContext';
   static const String demoNavigator = '/demoNavigator';
   static const String demoProvider = '/demoProvider';
+  static const String demoInherited = '/demoInherited';
 
   static final routes = <String, WidgetBuilder>{
     splash: (BuildContext context) => SplashScreen(),
@@ -27,8 +29,6 @@ class Routes {
     demoContext: (BuildContext context) => DemoContext(),
     demoNavigator: (BuildContext context) => DemoNavigator(),
     demoProvider: (BuildContext context) => DemoProvider(),
+    demoInherited: (BuildContext context) => InheritedWidgetExample(),
   };
 }
-
-
-
