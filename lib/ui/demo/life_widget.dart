@@ -108,6 +108,12 @@ class _CheckStateState extends State<CheckState> {
   }
 
   @override
+  void activate() {
+    print('active');
+    super.activate();
+  }
+
+  @override
   void didChangeDependencies() {
     print('didChangeDependencies');
     print(MediaQuery.of(context).size.width);
@@ -121,6 +127,13 @@ class _CheckStateState extends State<CheckState> {
   }
 
   @override
+  void deactivate() {
+    print('deactive');
+    // TODO: implement deactivate
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
     print('dispose');
     super.dispose();
@@ -129,7 +142,6 @@ class _CheckStateState extends State<CheckState> {
   @override
   Widget build(BuildContext context) {
     print('rebuild');
-    print('count off widget ${countOfWidget}');
     return Column(
       children: [
         Text(countOfWidget.toString()),
